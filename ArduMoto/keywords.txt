@@ -16,7 +16,9 @@ begin KEYWORD2
 beginMotorA KEYWORD2
 beginMotorB KEYWORD2
 setSpeed  KEYWORD2
-fadeSpeed KEYWORD2
+setSpeeds KEYWORD2
+slowChange KEYWORD2
+getSpeed KEYWORD2
 stop  KEYWORD2
 brake KEYWORD2
 
