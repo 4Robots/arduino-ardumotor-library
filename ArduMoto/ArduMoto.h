@@ -38,17 +38,17 @@ class ArduMoto
     void beginMotoA(int directionPin, int pwmPin);
     void beginMotoB(int directionPin, int pwmPin);
 
-    void setSpeed(char moto, char speed);          // Set the speed of a selected motor, range: -100 to +100
-	void setSpeeds(char speedA, char speedB);     // Set the speeds for both motors, range: -100 to +100
-    void slowChange(char moto, char speed);        // Fade the speed of a motor slowly to a specific value: range -100 to 100
+    void setSpeed(char moto, int speed);          // Set the speed of a selected motor, range: -100 to +100
+	void setSpeeds(int speedA, int speedB);     // Set the speeds for both motors, range: -100 to +100
+    void slowChange(char moto, int speed);        // Fade the speed of a motor slowly to a specific value: range -100 to 100
 
-    char getSpeed(char moto);          			  // Get the speed of a selected motor, range: -100 to +100
+    int getSpeed(char moto);          			  // Get the speed of a selected motor, range: -100 to +100
 	
     void stop(char moto);
     void brake(char moto);                        // Brake the motor
 	
   private:
-    char _motoSpeedA; // range: -100 to +100
-    char _motoSpeedB; // range: -100 to +100
+    int _motoSpeedA; // range: -100 to +100
+    int _motoSpeedB; // range: -100 to +100
 };
 #endif

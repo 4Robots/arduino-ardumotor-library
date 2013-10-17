@@ -61,10 +61,13 @@ void ArduMoto::beginMotoB(int directionPin, int pwmPin)
 }
 
 /// setSpeed: from -100 to + 100
-void ArduMoto::setSpeed(char moto, char speed)
+void ArduMoto::setSpeed(char moto, int speed)
 {
   byte throttle = map(abs(speed),0,100,0,255);
-
+#ifdef DEBUG_MOTORS
+    Serial.print("Setting Motor throttle to ");
+    Serial.println(throttle);
+#endif
   if(moto == 'A')
   {
     _motoSpeedA = speed;
@@ -102,14 +105,14 @@ void ArduMoto::setSpeed(char moto, char speed)
 }
 
 /// setSpeeds: set the speeds for both motors, range: -100 to +100
-void ArduMoto::setSpeeds(char speedA, char speedB)
+void ArduMoto::setSpeeds(int speedA, int speedB)
 {
 	setSpeed('A', speedA);
 	setSpeed('B', speedB);
 }
 
 /// getSpeed: get the speed of a selected motor, range: -100 to +100
-char ArduMoto::getSpeed(char moto)
+int ArduMoto::getSpeed(char moto)
 {
 	switch(moto){
 	case 'A': return _motoSpeedA;
@@ -118,7 +121,7 @@ char ArduMoto::getSpeed(char moto)
 }          			  
 	
 /// slowChange: set the speed to desiredSpeed, adjusting slowly towards the desired value
-void ArduMoto::slowChange(char moto, char desiredSpeed)
+void ArduMoto::slowChange(char moto, int desiredSpeed)
 {
   if(moto == 'A')
   {
@@ -146,6 +149,7 @@ void ArduMoto::slowChange(char moto, char desiredSpeed)
   if(moto == 'B')
   {
 #ifdef DEBUG_MOTORS
+	int difference;
     difference = desiredSpeed - _motoSpeedB;
     Serial.print("Difference: ");
     Serial.println(difference);
@@ -172,14 +176,8 @@ void ArduMoto::stop(char moto)
 {
   setSpeed(moto, 0);
 #ifdef DEBUG_MOTORS
-  if(moto == 'A')
-  {
-    Serial.println("Stopping Motor A");
-  }
-  else if (moto == 'B')
-  {
-    Serial.println("Stopping Motor B");
-  }
+    Serial.print("Stopping Motor ");
+	Serial.println(moto);
 #endif
 }
 
